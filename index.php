@@ -1,3 +1,9 @@
+<?php 
+require 'function.php';
+
+$blog = query("SELECT * FROM blog_posts");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,44 +64,21 @@
         </div>  <br><br>
         
         <div class="blog-container">
-            <article class="blog-box">
-                <div class="blog-img">
-                <img src="images/music.jpeg" alt="Music">
-                </div>
-                <h2>Music</h2>
-                <div class="blog-text">
-                    <p>
-                        Music serves many purposes and holds different meanings for different people. Music is a versatile art form that serves as a means of expression, communication, entertainment, healing, and cultural connection. Music is an antidote for emotion when words fail. music is my painkiller
-                    </p>
-                    <a href="https://study.com/academy/lesson/what-is-music-definition-terminology-characteristics.html#:~:text=around%20the%20world.-,Music%20is%20an%20ancient%20art%20form%20that%20began%20during%20prehistoric,form%2C%20texture%2C%20and%20expression.">Read More</a>
-                </div>
-            </article><br>
-            
-            <article class="blog-box">
-                <div class="blog-img">
-                    <img src="images/Mental.jpeg" alt="Mental">
-                </div>
-                <h2>Mental Health</h2>
-                <div class="blog-text">
-                    <p>
-                        Mental health encompasses our emotional, psychological, and social well-being. It affects how we think, feel, and act, influencing how we handle stress, relate to others, and make choices. Maintaining good mental health is essential for overall well-being and quality of life.
-                    </p>
-                    <a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-strengthening-our-response">Read More</a>
-                </div>
-            </article><br>
 
-            <article class="blog-box">
+        <?php foreach ( $blog as $row): ?>
+        <article class="blog-box">
                 <div class="blog-img">
-                    <img src="images/ai.jpg" alt="AI">
+                <img src="<?= $row["image_url"]; ?>" alt="<?= $row["alt_text"]; ?>">
                 </div>
-                <h2>What is Artificial Intelligence?</h2>
+                <h2><?= $row["title"]; ?></h2>
                 <div class="blog-text">
                     <p>
-                        Artificial Intelligence (AI) is a branch of computer science focused on creating machines or software that can perform tasks typically requiring human intelligence. These tasks include learning from experience, understanding natural language, recognizing patterns, solving problems, and making decisions.
+                    <?= $row["content"]; ?>
                     </p>
-                    <a href="https://web.dev/articles/ai-overview?hl=en">Read More</a>
+                    <a href="<?= $row["link"]; ?>">Read More</a>
                 </div>
-            </article>
+            </article><br>
+            <?php endforeach; ?>
         </div>
     </section>  
 
